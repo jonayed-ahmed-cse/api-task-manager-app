@@ -20,6 +20,11 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+
+console.log('MONGO_URI length:', process.env.MONGO_URI ? process.env.MONGO_URI.length : 'UNDEFINED');
+console.log('MONGO_URI starts:', JSON.stringify(process.env.MONGO_URI?.slice(0, 15)));
+console.log('MONGO_URI ends:', JSON.stringify(process.env.MONGO_URI?.slice(-15)));
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDB connected successfully');
