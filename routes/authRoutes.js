@@ -32,6 +32,32 @@ router.post('/registration', async (req, res) => {
   }
 });
 
+// router.post('/login', async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return res.status(404).json({ status: 'fail', message: 'User not found' });
+//     }
+
+//     const isPasswordCorrect = await bcrypt.compare(password, user.password);
+//     if (!isPasswordCorrect) {
+//       return res.status(401).json({ status: 'fail', message: 'Incorrect password' });
+//     }
+
+//     const token = jwt.sign(
+//       { id: user._id, email: user.email },
+//       process.env.JWT_SECRET,
+//       { expiresIn: '7d' }
+//     );
+
+//     res.json({ status: 'success', token });
+//   } catch (err) {
+//     res.status(500).json({ status: 'fail', message: err.message });
+//   }
+// });
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -52,7 +78,17 @@ router.post('/login', async (req, res) => {
       { expiresIn: '7d' }
     );
 
-    res.json({ status: 'success', token });
+    res.json({
+      status: 'success',
+      token,
+      data: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        mobile: user.mobile,
+        photo: user.photo,
+      },
+    });
   } catch (err) {
     res.status(500).json({ status: 'fail', message: err.message });
   }
