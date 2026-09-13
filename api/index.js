@@ -26,6 +26,8 @@ const PORT = process.env.PORT || 5000;
 console.log('MONGO_URI length:', process.env.MONGO_URI ? process.env.MONGO_URI.length : 'UNDEFINED');
 console.log('MONGO_URI starts:', JSON.stringify(process.env.MONGO_URI?.slice(0, 15)));
 console.log('MONGO_URI ends:', JSON.stringify(process.env.MONGO_URI?.slice(-15)));
+console.log('EMAIL_USER set:', !!process.env.EMAIL_USER);
+console.log('EMAIL_PASS set:', !!process.env.EMAIL_PASS);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
