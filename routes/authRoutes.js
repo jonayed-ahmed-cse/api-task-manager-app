@@ -136,6 +136,7 @@ router.get('/RecoverVerifyEmail/:email', async (req, res) => {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      family: 4,
     });
 
     await transporter.sendMail({
